@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @DubboComponentScan
 @SpringBootApplication
-public class ProviderApplication {
+public class SpringbootProviderApplication {
 
     public static void main(String[] args) {
-        System.setProperty("dubbo.application.logger","log4j2") ;
-        SpringApplication.run(ProviderApplication.class, args) ;
+        //System.setProperty("dubbo.application.logger","log4j2") ;
+        SpringApplication.run(SpringbootProviderApplication.class, args) ;
     }
 }
