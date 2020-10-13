@@ -11,6 +11,16 @@ spring:
         - id: test_route
           predicates:
             - Path=/test/**
-          uri: http://localhost:8080
+          uri: http://localhost:8080/test/say
+        - id: baidu_route
+          uri: http://baidu.com:80/
+          predicates:
+            - Path=/baidu
+          filters:
+            - StripPrefix=1 # 跳过前缀
 server:
   port: 8088
+
+logging:
+  level:
+    reactor.netty: debug
