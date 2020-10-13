@@ -26,6 +26,8 @@
 	<modules>
         <module>hello-world</module>
         <module>sample-api</module>
+        <module>sample-provider</module>
+        <module>sample-consumer</module>
     </modules>
 
     <dependencyManagement>
