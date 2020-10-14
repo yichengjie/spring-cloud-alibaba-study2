@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
-    @Reference
+    // check默认true，启动时provider
+    @Reference(check = false, mock = "com.yicj.dubbo.service.mock.MockHelloService", cluster = "failfast")
     private IHelloService helloService ;
 
     @GetMapping("/say")
