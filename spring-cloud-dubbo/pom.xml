@@ -27,6 +27,7 @@
         <module>spring-cloud-dubbo-sample-api</module>
         <module>spring-cloud-dubbo-sample-provider</module>
         <module>spring-cloud-dubbo-sample-consumer</module>
+        <module>hello-world</module>
     </modules>
 
     <dependencyManagement>
@@ -37,6 +38,12 @@
                 <version>${spring.cloud-version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>2.7.3</version>
             </dependency>
 
             <dependency>

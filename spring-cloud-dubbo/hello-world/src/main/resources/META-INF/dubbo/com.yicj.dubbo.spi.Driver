@@ -1,0 +1,2 @@
+mysqlDriver=com.yicj.dubbo.spi.MysqlDriver
+myAdaptive=com.yicj.dubbo.spi.AdaptiveCompiler
