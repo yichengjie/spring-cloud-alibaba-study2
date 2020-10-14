@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.17.RELEASE</version>
+        <version>2.1.11.RELEASE</version>
         <relativePath/>
     </parent>
 
@@ -20,7 +20,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-        <spring.cloud-version>Greenwich.SR6</spring.cloud-version>
+        <spring.cloud-version>Greenwich.SR2</spring.cloud-version>
     </properties>
 
 	<modules>
@@ -39,8 +39,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!--spring-cloud-alibba默认使用的是2.0.2版本，这个版本的starter使用的rocketmq版本是4.4.0
-           与服务端4.5.1不兼容，所以这里手动指定2.0.3的starter-->
+			<dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2.1.1.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>org.jboss.logging</groupId>
                 <artifactId>jboss-logging</artifactId>
