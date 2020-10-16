@@ -39,20 +39,22 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo</artifactId>
-                <version>2.7.3</version>
-            </dependency>
-
+            <!--
+                入口类：DubboNonWebApplicationEnvironmentPostProcessor
+                注意2.1.1与dubbo2.7.5不兼容,
+                启动时会报找不到org.apache.dubbo.config.spring.util.PropertySourcesUtils类，
+                这个类在2.7.3的jar中存在，2.7.5中已经移除，所以启动报错，
+                2.1.2版本的spring-cloud-starter-dubbo直接使用spring-context-support中的
+                com.alibaba.spring.util.PropertySourcesUtils类
+             -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>2.1.1.RELEASE</version>
+                <version>2.1.2.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
 
             <dependency>
                 <groupId>org.jboss.logging</groupId>
