@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>com.yicj.config-springboot</groupId>
-    <artifactId>spring-boot-nacos-config</artifactId>
+    <artifactId>spring-boot-config-nacos</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
