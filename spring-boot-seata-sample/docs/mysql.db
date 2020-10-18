@@ -1,0 +1,32 @@
+-- 对应seata_order数据库
+CREATE TABLE tbl_order(
+    id             INT(11)      NOT NULL  AUTO_INCREMENT  PRIMARY KEY,
+    order_no       VARCHAR(255) DEFAULT NULL,
+    user_id        VARCHAR(255) DEFAULT NULL,
+    product_code   VARCHAR(255) DEFAULT NULL,
+    COUNT          INT(11)      DEFAULT 0,
+    amount         INT(11)      DEFAULT 0
+) ENGINE = INNODB DEFAULT CHARSET = utf8;
+
+
+-- 对应seata_repo数据库
+CREATE TABLE tbl_repo (
+    id            INT(11)         NOT NULL AUTO_INCREMENT   PRIMARY KEY,
+    product_code  VARCHAR(255)    DEFAULT NULL   UNIQUE,
+    NAME          VARCHAR(255)    DEFAULT NULL,
+    COUNT         INT(11)         DEFAULT 0
+) ENGINE = INNODB DEFAULT CHARSET = utf8;
+
+--初始化数据
+INSERT INTO tbl_repo VALUES(1, 'GP2020020201', '键盘', '1000') ;
+INSERT INTO tbl_repo VALUES(2, 'GP2020020202', '抱枕', '300') ;
+
+--对应seata_acount数据库
+CREATE TABLE tbl_account (
+    id              INT(11)          NOT NULL AUTO_INCREMENT  PRIMARY KEY,
+    user_id         VARCHAR(255)     DEFAULT NULL,
+    balance         INT(11)          DEFAULT 0
+) ENGINE = INNODB DEFAULT CHARSET = utf8;
+
+-- 初始化数据
+INSERT INTO tbl_account VALUES(1, '1001', '10000.00') ;
