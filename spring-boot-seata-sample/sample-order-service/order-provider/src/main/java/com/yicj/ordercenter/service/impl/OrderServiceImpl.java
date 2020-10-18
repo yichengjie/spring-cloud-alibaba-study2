@@ -30,7 +30,6 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public ObjectResponse<OrderDto> createOrder(OrderDto orderDto) {
-        log.info("全局事务ID："+ RootContext.getXID());
         ObjectResponse response=new ObjectResponse();
         try {
             //账户扣款
