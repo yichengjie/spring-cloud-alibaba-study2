@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yicj.ordercenter.dao.order.TblOrderMapper">
+  <resultMap id="BaseResultMap" type="com.yicj.ordercenter.domain.entity.order.TblOrder">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="product_code" jdbcType="VARCHAR" property="productCode" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="amount" jdbcType="INTEGER" property="amount" />
+  </resultMap>
+</mapper>
