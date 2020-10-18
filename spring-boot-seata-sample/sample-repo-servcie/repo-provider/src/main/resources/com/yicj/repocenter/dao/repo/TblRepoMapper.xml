@@ -10,4 +10,8 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="count" jdbcType="INTEGER" property="count" />
   </resultMap>
+
+  <update id="decreaseRepo">
+     update tbl_repo set count=count-${count} where product_code = #{productCode} and count>0
+  </update>
 </mapper>

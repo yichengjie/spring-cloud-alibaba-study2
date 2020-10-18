@@ -9,4 +9,12 @@
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="balance" jdbcType="INTEGER" property="balance" />
   </resultMap>
+
+  <update id="decreaseAccount">
+    update tbl_account set balance = balance-${balance} where user_id = #{userId} and balance>0
+  </update>
+
+  <update id="testGlobalLock">
+     select * from tbl_account where user_id = #{userId} for update
+  </update>
 </mapper>

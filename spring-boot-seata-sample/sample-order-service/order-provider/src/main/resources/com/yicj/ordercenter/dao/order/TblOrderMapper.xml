@@ -12,4 +12,9 @@
     <result column="count" jdbcType="INTEGER" property="count" />
     <result column="amount" jdbcType="INTEGER" property="amount" />
   </resultMap>
+
+  <insert id="createOrder" keyProperty="id" useGeneratedKeys="true"
+          parameterType="com.yicj.ordercenter.domain.entity.order.TblOrder">
+    insert into tbl_order values(null,#{orderNo},#{userId},#{productCode},${count},${amount})
+  </insert>
 </mapper>
