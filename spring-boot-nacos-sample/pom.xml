@@ -25,6 +25,7 @@
     <modules>
         <module>provider-sample-nacos</module>
         <module>consumer-sample-nacos</module>
+        <module>config-sample-nacos</module>
     </modules>
 
     <dependencyManagement>
@@ -32,6 +33,12 @@
             <dependency>
                 <groupId>com.alibaba.boot</groupId>
                 <artifactId>nacos-discovery-spring-boot-starter</artifactId>
+                <version>0.2.7</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.boot</groupId>
+                <artifactId>nacos-config-spring-boot-starter</artifactId>
                 <version>0.2.7</version>
             </dependency>
         </dependencies>
