@@ -1,10 +1,6 @@
 1. 添加依赖
     ```text
     <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-    <dependency>
         <groupId>com.alibaba.boot</groupId>
         <artifactId>nacos-config-spring-boot-starter</artifactId>
     </dependency>
