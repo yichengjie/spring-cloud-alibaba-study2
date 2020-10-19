@@ -16,9 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.UUID;
 
 @Slf4j
-@Service
+@Service(version = "1.0.1", group = "yicj")
 public class OrderServiceImpl implements IOrderService {
-    @Reference
+    @Reference(version = "1.0.1", group = "yicj")
     private IAccountService accountService ;
     @Autowired
     private  TblOrderMapper orderMapper ;
