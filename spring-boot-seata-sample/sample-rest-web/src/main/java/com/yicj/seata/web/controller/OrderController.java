@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class OrderController {
-    private final IRestOrderService restOrderService;
+    @Autowired
+    private IRestOrderService restOrderService;
 
     @PostMapping("/order")
     public ObjectResponse order(@RequestBody OrderRequest orderRequest) throws Exception {

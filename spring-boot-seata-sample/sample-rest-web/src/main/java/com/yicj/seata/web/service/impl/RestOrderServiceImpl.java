@@ -10,7 +10,7 @@ import com.yicj.seata.common.response.ObjectResponse;
 import com.yicj.seata.web.service.IRestOrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
-import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
