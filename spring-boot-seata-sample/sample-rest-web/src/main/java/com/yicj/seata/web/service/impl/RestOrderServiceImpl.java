@@ -35,7 +35,7 @@ public class RestOrderServiceImpl implements IRestOrderService {
         orderDto.setOrderCount(orderRequest.getCount());
         orderDto.setProductCode(orderRequest.getProductCode());
         ObjectResponse orderRes=orderService.createOrder(orderDto);
-        if(orderRequest.getProductCode().equals("GP20200202002")){
+        if(orderRequest.getProductCode().equals("GP2020020202")){
             throw new Exception("系统异常");
         }
         ObjectResponse response=new ObjectResponse();
