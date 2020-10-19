@@ -5,6 +5,7 @@ import com.yicj.repocenter.service.IRepoService;
 import com.yicj.seata.common.constants.ResCode;
 import com.yicj.seata.common.dto.ProductDto;
 import com.yicj.seata.common.response.ObjectResponse;
+import io.seata.core.context.RootContext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ public class RepoServiceImpl implements IRepoService {
 
     @Override
     public ObjectResponse decreaseRepo(ProductDto productDto) {
+        log.info("开始全局事务: xid = {}", RootContext.getXID());
         ObjectResponse response=new ObjectResponse();
         try {
             int repo = repoMapper.decreaseRepo(productDto.getProductCode(), productDto.getCount());

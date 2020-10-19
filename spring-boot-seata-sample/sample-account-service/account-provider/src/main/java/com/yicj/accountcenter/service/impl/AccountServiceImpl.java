@@ -5,6 +5,7 @@ import com.yicj.accountcenter.service.IAccountService;
 import com.yicj.seata.common.constants.ResCode;
 import com.yicj.seata.common.dto.AccountDto;
 import com.yicj.seata.common.response.ObjectResponse;
+import io.seata.core.context.RootContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Service;
@@ -19,6 +20,7 @@ public class AccountServiceImpl implements IAccountService {
 
     @Override
     public ObjectResponse decreaseAccount(AccountDto accountDto) {
+        log.info("开始全局事务: xid = {}", RootContext.getXID());
         ObjectResponse response = new ObjectResponse() ;
         try {
             int rs = accountMapper.decreaseAccount(

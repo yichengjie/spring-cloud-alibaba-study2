@@ -8,6 +8,8 @@ import com.yicj.seata.common.dto.OrderRequest;
 import com.yicj.seata.common.dto.ProductDto;
 import com.yicj.seata.common.response.ObjectResponse;
 import com.yicj.seata.web.service.IRestOrderService;
+import io.seata.core.context.RootContext;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Service;
@@ -20,8 +22,10 @@ public class RestOrderServiceImpl implements IRestOrderService {
     @Reference
     private IOrderService orderService;
 
+    @GlobalTransactional(timeoutMills = 30000, name = "sample-rest-web")
     @Override
     public ObjectResponse handleBusiness(OrderRequest orderRequest) throws Exception {
+        log.info("开始全局事务: xid = {}", RootContext.getXID());
         log.info("begin order: "+orderRequest);
         //1. 扣减库存
         ProductDto productDto=new ProductDto();

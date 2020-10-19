@@ -9,6 +9,7 @@ import com.yicj.seata.common.constants.ResCode;
 import com.yicj.seata.common.dto.AccountDto;
 import com.yicj.seata.common.dto.OrderDto;
 import com.yicj.seata.common.response.ObjectResponse;
+import io.seata.core.context.RootContext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
@@ -27,6 +28,7 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public ObjectResponse<OrderDto> createOrder(OrderDto orderDto) {
+        log.info("开始全局事务: xid = {}", RootContext.getXID());
         ObjectResponse response=new ObjectResponse();
         try {
             //账户扣款
