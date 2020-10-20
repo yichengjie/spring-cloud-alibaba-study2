@@ -41,10 +41,9 @@
     ```text
     sudo service mysql restart
     ```
-10. 检查防火墙配置,关闭防火墙，或开放3306端口
+10. 检查防火墙配置,开放3306端口
     ```text
     sudo ufw status
-    若显示Status: inactive说明防火墙开启，
-    此时可利用sudo ufw disable关闭防火墙
-    或则sudo ufw allow 3306
+    若显示Status: inactive说明防火墙开启
+    sudo ufw allow 3306
     ```
