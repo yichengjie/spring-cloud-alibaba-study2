@@ -2,7 +2,7 @@
     ```text
     sudo apt-get install mysql-server
     ```
-2. 判断Mysql是否启动
+2. 判断mysql是否启动
     ```text
     ps -ef|grep mysqld
     ```
