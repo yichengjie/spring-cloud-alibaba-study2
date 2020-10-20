@@ -31,7 +31,7 @@ public class RestOrderServiceImpl implements IRestOrderService {
         ProductDto productDto=new ProductDto();
         productDto.setProductCode(orderRequest.getProductCode());
         productDto.setCount(orderRequest.getCount());
-        ObjectResponse repoRes=repoService.decreaseRepo(productDto);
+        //ObjectResponse repoRes=repoService.decreaseRepo(productDto);
         //2. 创建订单
         OrderDto orderDto=new OrderDto();
         orderDto.setUserId(orderRequest.getUserId());
