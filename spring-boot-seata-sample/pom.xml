@@ -13,6 +13,7 @@
         <module>sample-account-service</module>
         <module>sample-seata-common</module>
         <module>sample-rest-web</module>
+        <module>hello-world</module>
     </modules>
 
     <parent>
