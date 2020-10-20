@@ -17,9 +17,9 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class RestOrderServiceImpl implements IRestOrderService {
-    @Reference
+    @Reference(version = "1.0.1", group = "yicj")
     private IRepoService repoService;
-    @Reference
+    @Reference(version = "1.0.1", group = "yicj")
     private IOrderService orderService;
 
     @GlobalTransactional(timeoutMills = 30000, name = "sample-rest-web")

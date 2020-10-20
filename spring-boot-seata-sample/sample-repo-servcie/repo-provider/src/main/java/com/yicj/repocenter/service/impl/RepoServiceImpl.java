@@ -11,7 +11,7 @@ import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
-@Service
+@Service(version = "1.0.1", group = "yicj")
 public class RepoServiceImpl implements IRepoService {
     @Autowired
     private TblRepoMapper repoMapper;
