@@ -34,11 +34,22 @@ public class MyAppRunner implements ApplicationRunner {
         String dateFormatStr = appProperties.getDateFormatStr() ;
         ExcelReadHelper excelReadHelper = new ExcelReadHelper(filePath, sheetName);
         // 1. 获取excel中的数据
-        List<Map<String, String>> dateMapList = excelReadHelper.readExcelData(dateNameList, dateFormatStr);
-        // 2. 组装sql模板与数据
-        List<String> sqlList = this.assembleSql(dateMapList);
-        // 3. 打印sql
+        List<Map<String, String>> dataMapList = excelReadHelper.readExcelData(dateNameList, dateFormatStr);
+        // 2. 特殊处理自增字段
+        this.specialDealSqlNumValue(dataMapList);
+        // 3. 组装sql模板与数据
+        List<String> sqlList = this.assembleSql(dataMapList);
+        // 4. 打印sql
         printSqlList(sqlList);
+    }
+
+    private void specialDealSqlNumValue(List<Map<String, String>> dateMapList){
+        String incrementFieldName = appProperties.getIncrementFieldName();
+        Integer incrementStartValue = appProperties.getIncrementStartValue();
+        for (Map<String, String> item : dateMapList) {
+            item.put(incrementFieldName,incrementStartValue.toString()) ;
+            incrementStartValue = incrementStartValue +1 ;
+        }
     }
 
     private void printSqlList(List<String> sqlList) throws IOException {

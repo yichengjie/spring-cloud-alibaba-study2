@@ -16,4 +16,8 @@ public class MyAppProperties {
     private String dateNames ;
     // 日期格式
     private String dateFormatStr ;
+    // 自增列名称
+    private String incrementFieldName ;
+    // 自增列起始值
+    private Integer incrementStartValue ;
 }
