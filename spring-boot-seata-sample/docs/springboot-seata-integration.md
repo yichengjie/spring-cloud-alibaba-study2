@@ -10,7 +10,7 @@
     CREATE TABLE undo_log(
         id               BIGINT(20)        NOT NULL       AUTO_INCREMENT   PRIMARY KEY,
         branch_id        BIGINT(20)        NOT NULL,
-        xid              VARCHAR(20)       NOT NULL,
+        xid              VARCHAR(100)       NOT NULL,
         context          VARCHAR(128)      NOT NULL,
         rollback_info    LONGBLOB          NOT NULL,
         log_status       INT(11)           NOT NULL,

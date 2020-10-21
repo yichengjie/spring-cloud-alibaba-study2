@@ -12,6 +12,9 @@
       4.2 使用git bash 进入目录/seata-1.3.0/script/config-center/nacos  
       4.3 执行sh nacos-config.sh -h 192.168.221.128   （后面ip为nacos服务器地址）
 5. 创建seata数据，并找到/seata-1.3.0/script/server/db/mysql.sql执行
-6. 启动seata即可
+6. 启动seata并指定本机IP，IP不指定可能会导致seata注册到nacos的服务地址有问题，导致应用从nacos地址获取seata事务失败
+    ```text
+    ./seata-server.sh -h 192.168.221.128
+    ```
     
     
