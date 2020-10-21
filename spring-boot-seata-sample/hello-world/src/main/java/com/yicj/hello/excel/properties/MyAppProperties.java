@@ -12,4 +12,8 @@ public class MyAppProperties {
     private String sheetName ;
     // sql模板
     private String sqlTemplate ;
+    // 日期列名称
+    private String dateNames ;
+    // 日期格式
+    private String dateFormatStr ;
 }

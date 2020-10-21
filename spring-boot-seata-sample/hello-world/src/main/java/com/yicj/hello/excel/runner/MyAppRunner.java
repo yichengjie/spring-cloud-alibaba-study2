@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,9 +26,12 @@ public class MyAppRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         String filePath = appProperties.getFullFilePath() ;
         String sheetName = appProperties.getSheetName() ;
+        String dateNames = appProperties.getDateNames();
+        List<String> dateNameList = parseDateColumnNames(dateNames) ;
+        String dateFormatStr = appProperties.getDateFormatStr() ;
+
         ExcelReadHelper excelReadHelper = new ExcelReadHelper(filePath, sheetName);
-        List<Map<String, String>> mapList = excelReadHelper.readExcelData();
-        log.info("size : {}", mapList.size());
+        List<Map<String, String>> mapList = excelReadHelper.readExcelData(dateNameList, dateFormatStr);
         mapList.forEach(item -> {
             String sqlTemplate = appProperties.getSqlTemplate().toUpperCase();
             VariableTokenHandler handler = new VariableTokenHandler(item);
@@ -34,6 +39,20 @@ public class MyAppRunner implements ApplicationRunner {
             String retContent = parser.parse(sqlTemplate);
             log.info("sql is  : {}", retContent);
         });
+    }
+
+
+    private List<String> parseDateColumnNames(String dateNames){
+        List<String> dateNameList = new ArrayList<>() ;
+        if (!StringUtils.isEmpty(dateNames)){
+            String[] infos = dateNames.toUpperCase().split(",");
+            for (String name: infos){
+                if (!StringUtils.isEmpty(name)){
+                    dateNameList.add(name) ;
+                }
+            }
+        }
+        return dateNameList ;
     }
 
 

@@ -1,12 +1,11 @@
 package com.yicj.hello.excel.common;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.*;
+
 import java.io.FileInputStream;
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,11 +69,12 @@ public class ExcelReadHelper {
     }
 
     //打印excel数据
-    public List<Map<String,String>> readExcelData(){
+    public List<Map<String,String>> readExcelData(List<String> dateNameList, String dateFormatStr){
         List<Map<String,String>> list = new ArrayList<>() ;
         // 读取表头
         List<String> titleNames = readRow(sheet.getRow(0)) ;
         titleNames = titleNames.stream().map(String::toUpperCase).collect(Collectors.toList()) ;
+        SimpleDateFormat format = new SimpleDateFormat(dateFormatStr) ;
         // 读取内容
         //1. 获取excel总共有多少行
         int rowCount = sheet.getPhysicalNumberOfRows();
@@ -85,9 +85,14 @@ public class ExcelReadHelper {
             int columns = row.getPhysicalNumberOfCells();
             for(int j = 0; j < columns; j++){
                 String name = titleNames.get(j) ;
-                String value = row.getCell(j).toString();
+                Cell cell = row.getCell(j) ;
+                String value  ;
+                if (dateNameList.contains(name)){
+                    value = format.format(cell.getDateCellValue()) ;
+                }else {
+                    value = cell.toString() ;
+                }
                 tempMap.put(name, value) ;
-                log.info("name : {}, value:{}", name, value);
             }
             list.add(tempMap) ;
         }
