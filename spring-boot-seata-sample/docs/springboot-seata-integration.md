@@ -19,11 +19,8 @@
         UNIQUE KEY ux_undo_log(xid,branch_id)
     )  ENGINE = INNODB DEFAULT CHARSET = utf8;
     ```
-3. 修改application.properties配置   
-    ```text
-    3.1 seata源码中/seata-1.3.0/script/client/spring/application.properties中有效内容复制粘贴
-    3.2 
-    ```
+3. 修改application.properties配置,从源码包中复制即可 
+   > seata源码中/seata-1.3.0/script/client/spring/application.properties中有效内容复制粘贴
 4. 配置主要关注项
     ```text
     seata.enabled=true
