@@ -3,6 +3,7 @@ package com.yicj.hello.excel.common;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ExcelReadHelper {
     private Sheet sheet;
+    private String rootPath ;
 
     /**
      * 构造函数，初始化excel数据
@@ -24,7 +26,9 @@ public class ExcelReadHelper {
     public ExcelReadHelper(String filePath, String sheetName){
         FileInputStream fileInputStream;
         try {
-            fileInputStream = new FileInputStream(filePath);
+            File file = new File(filePath) ;
+            this.rootPath = file.getParent();
+            fileInputStream = new FileInputStream(file);
             Workbook workbook = WorkbookFactory.create(fileInputStream);
             //XSSFWorkbook sheets = new XSSFWorkbook(fileInputStream);
             //获取sheet
@@ -74,12 +78,12 @@ public class ExcelReadHelper {
         // 读取表头
         List<String> titleNames = readRow(sheet.getRow(0)) ;
         titleNames = titleNames.stream().map(String::toUpperCase).collect(Collectors.toList()) ;
-        SimpleDateFormat format = new SimpleDateFormat(dateFormatStr) ;
+        SimpleDateFormat formater = new SimpleDateFormat(dateFormatStr) ;
         // 读取内容
         //1. 获取excel总共有多少行
         int rowCount = sheet.getPhysicalNumberOfRows();
         for(int i = 1; i < rowCount; i++){
-            Map<String,String> tempMap = new HashMap<>() ;
+            Map<String,String> tempMap = new HashMap<>();
             Row row = sheet.getRow(i);
             // 获取当前行总列数
             int columns = row.getPhysicalNumberOfCells();
@@ -88,7 +92,7 @@ public class ExcelReadHelper {
                 Cell cell = row.getCell(j) ;
                 String value  ;
                 if (dateNameList.contains(name)){
-                    value = format.format(cell.getDateCellValue()) ;
+                    value = formater.format(cell.getDateCellValue()) ;
                 }else {
                     value = cell.toString() ;
                 }
@@ -98,7 +102,6 @@ public class ExcelReadHelper {
         }
         return list ;
     }
-
 
 
     private List<String> readRow(Row row){

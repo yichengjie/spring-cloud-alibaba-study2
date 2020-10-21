@@ -5,16 +5,19 @@ import com.yicj.hello.excel.properties.MyAppProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.parsing.GenericTokenParser;
 import org.apache.ibatis.parsing.TokenHandler;
+import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -29,16 +32,41 @@ public class MyAppRunner implements ApplicationRunner {
         String dateNames = appProperties.getDateNames();
         List<String> dateNameList = parseDateColumnNames(dateNames) ;
         String dateFormatStr = appProperties.getDateFormatStr() ;
-
         ExcelReadHelper excelReadHelper = new ExcelReadHelper(filePath, sheetName);
-        List<Map<String, String>> mapList = excelReadHelper.readExcelData(dateNameList, dateFormatStr);
-        mapList.forEach(item -> {
+        // 1. 获取excel中的数据
+        List<Map<String, String>> dateMapList = excelReadHelper.readExcelData(dateNameList, dateFormatStr);
+        // 2. 组装sql模板与数据
+        List<String> sqlList = this.assembleSql(dateMapList);
+        // 3. 打印sql
+        printSqlList(sqlList);
+    }
+
+    private void printSqlList(List<String> sqlList) throws IOException {
+        String filePath = appProperties.getFullFilePath() ;
+        File file = new File(filePath) ;
+        String rootPath = file.getParent();
+        File tmpSqlFile = new File(rootPath, System.currentTimeMillis()+".sql") ;
+        BufferedWriter bw = null;
+        try {
+            FileWriter fout = new FileWriter(tmpSqlFile) ;
+            bw = new BufferedWriter(fout) ;
+            for (String sql: sqlList){
+                bw.write(sql);
+                bw.newLine();
+            }
+        }finally {
+            IOUtils.closeQuietly(bw);
+        }
+    }
+
+    private List<String> assembleSql(List<Map<String, String>> dateMapList){
+        return dateMapList.stream().map(item -> {
             String sqlTemplate = appProperties.getSqlTemplate().toUpperCase();
             VariableTokenHandler handler = new VariableTokenHandler(item);
-            GenericTokenParser parser = new GenericTokenParser("${", "}", handler) ;
+            GenericTokenParser parser = new GenericTokenParser("${", "}", handler);
             String retContent = parser.parse(sqlTemplate);
-            log.info("sql is  : {}", retContent);
-        });
+            return retContent;
+        }).collect(Collectors.toList());
     }
 
 
@@ -64,7 +92,12 @@ public class MyAppRunner implements ApplicationRunner {
         }
         @Override
         public String handleToken(String content) {
-            return variables.get(content);
+            String value = variables.get(content);
+            if (StringUtils.isEmpty(value)){
+                return null ;
+            }else {
+                return "'"+value+"'" ;
+            }
         }
     }
 }
