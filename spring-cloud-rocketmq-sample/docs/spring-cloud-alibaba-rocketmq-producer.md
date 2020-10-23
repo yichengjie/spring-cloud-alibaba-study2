@@ -19,7 +19,7 @@
         <artifactId>classmate</artifactId>
     </dependency>
     ```
-####  使用自带通道
+####  使用自带通道生产消息
 1. 添加配置
     ```text
     # spring cloud stream config
@@ -53,7 +53,7 @@
         }
     }
     ```
-#### 自定义通道
+#### 自定义通道生产消息
 1. 参考Source接口编写自定义通道接口
     ```text
     public interface OrderSource {

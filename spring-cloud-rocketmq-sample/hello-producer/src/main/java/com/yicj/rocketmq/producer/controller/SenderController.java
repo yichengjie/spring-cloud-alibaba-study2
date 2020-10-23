@@ -1,6 +1,6 @@
-package com.yicj.rocket.controller;
+package com.yicj.rocketmq.producer.controller;
 
-import com.yicj.rocket.channel.OrderSource;
+import com.yicj.rocketmq.producer.channel.OrderSource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

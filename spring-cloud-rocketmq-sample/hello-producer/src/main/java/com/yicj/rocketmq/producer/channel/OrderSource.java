@@ -1,4 +1,4 @@
-package com.yicj.rocket.channel;
+package com.yicj.rocketmq.producer.channel;
 
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
