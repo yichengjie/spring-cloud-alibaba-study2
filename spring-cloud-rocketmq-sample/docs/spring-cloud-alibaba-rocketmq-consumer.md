@@ -47,3 +47,33 @@
         }
     }
     ```
+####  使用自定义通道消费消息
+1. 编写自定义接口
+    ```text
+    public interface InputChannel {
+        String USER_INPUT = "userInput" ;
+        String ORDER_INPUT = "orderInput" ;
+    
+        @Input(InputChannel.USER_INPUT)
+        SubscribableChannel userInput() ;
+    
+        @Input(InputChannel.ORDER_INPUT)
+        SubscribableChannel orderInput() ;
+    }
+    ```
+2. 添加配置
+    ```text
+    spring.cloud.stream.bindings.orderInput.destination=TopicOrder
+    spring.cloud.stream.bindings.orderInput.group=order-group
+    ```
+3. 在@EnableBinding注解中应用InputChannel通道接口
+    ```text
+    @EnableBinding({Sink.class, InputChannel.class})
+    ```
+4. 编写业务代码
+    ```text
+    @StreamListener(InputChannel.ORDER_INPUT)
+    public void receiveOrder(String recevieMsg){
+        log.info("receive order :{}", recevieMsg);
+    }
+    ```
