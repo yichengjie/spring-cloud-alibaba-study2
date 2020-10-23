@@ -59,7 +59,7 @@
     public interface OrderSource {
         String OUTPUT = "orderOutput";
     
-        @Output(Source.OUTPUT)
+        @Output(OrderSource.OUTPUT)
         MessageChannel output();
     }
     ```

@@ -18,7 +18,7 @@
     ```
 2. 启动Broker
     ```text
-    start Broker: nohup sh bin/mqbroker -n localhost:9876 -c conf/broker.conf autoCreateTopicEnable=true &
+    nohup sh bin/mqbroker -n localhost:9876 -c conf/broker.conf autoCreateTopicEnable=true &
     ```
 3. 停止RocketMQ
     ```text
