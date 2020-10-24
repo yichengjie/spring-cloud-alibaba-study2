@@ -5,7 +5,7 @@
         <artifactId>spring-cloud-starter-stream-rocketmq</artifactId>
     </dependency>
     ```
-2. 添加注解(启动类上添加)
+2. 添加注解
     ```text
     @EnableBinding({Source.class,Sink.class})
     @SpringBootApplication
