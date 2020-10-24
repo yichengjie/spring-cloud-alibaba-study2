@@ -8,6 +8,6 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 public class Order implements Serializable {
-    private String id ;
-    private String name ;
+    private String orderId ;
+    private String address ;
 }

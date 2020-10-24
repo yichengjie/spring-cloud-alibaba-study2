@@ -6,11 +6,13 @@ import org.apache.rocketmq.spring.core.RocketMQLocalTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQLocalTransactionState;
 import org.apache.rocketmq.spring.support.RocketMQHeaders;
 import org.springframework.messaging.Message;
+import org.springframework.stereotype.Component;
 
 
 // 实现RocketMQLocalTransactionListener接口，使用@RocketMQTransactionListener注解用于接收本地事务的监听
 // txProducerGroup是事务分组名称，和前面定义的OrderTransactionGroup保持一致,
-@RocketMQTransactionListener(txProducerGroup = "OrderTransaction")
+@Component
+@RocketMQTransactionListener(txProducerGroup = "OrderTransactionGroup")
 public class TransactionMsgListener implements RocketMQLocalTransactionListener {
     @Override
     public RocketMQLocalTransactionState executeLocalTransaction(Message msg, Object arg) {

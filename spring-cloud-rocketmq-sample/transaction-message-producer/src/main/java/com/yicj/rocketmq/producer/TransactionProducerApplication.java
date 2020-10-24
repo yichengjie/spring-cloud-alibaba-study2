@@ -15,10 +15,4 @@ public class TransactionProducerApplication {
     public static void main(String[] args) {
         SpringApplication.run(TransactionProducerApplication.class, args) ;
     }
-
-    @StreamListener(Sink.INPUT)
-    public void receive(String receiveMsg){
-
-        log.info("TopicTest receive : {}, receiveTime = {}", receiveMsg, System.currentTimeMillis());
-    }
 }

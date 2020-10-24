@@ -18,4 +18,9 @@ public class HelloStreamListener {
     public void receiveOrder(String recevieMsg){
         log.info("receive order :{}", recevieMsg);
     }
+
+    @StreamListener(InputChannel.USER_INPUT)
+    public void receiveUser(String recevieMsg){
+        log.info("receive order :{}", recevieMsg);
+    }
 }
