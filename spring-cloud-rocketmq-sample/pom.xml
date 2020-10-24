@@ -6,6 +6,7 @@
     <modules>
         <module>hello-producer</module>
         <module>hello-consumer</module>
+        <module>sequence-message-sample</module>
     </modules>
 
     <parent>
