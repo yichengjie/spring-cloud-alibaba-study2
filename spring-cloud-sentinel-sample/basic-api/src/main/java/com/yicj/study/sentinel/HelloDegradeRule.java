@@ -1,7 +1,12 @@
 package com.yicj.study.sentinel;
 
+import com.alibaba.csp.sentinel.Entry;
+import com.alibaba.csp.sentinel.SphU;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.csp.sentinel.slots.block.RuleConstant;
 import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRule;
+import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRuleManager;
+import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -20,6 +25,7 @@ public class HelloDegradeRule {
         degradeRule.setMinRequestAmount(5) ;
         degradeRule.setRtSlowRequestAmount(5) ;
         rules.add(degradeRule) ;
+        DegradeRuleManager.loadRules(rules);
     }
 
 
