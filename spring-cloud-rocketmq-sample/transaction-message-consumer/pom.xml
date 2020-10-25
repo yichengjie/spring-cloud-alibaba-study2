@@ -18,6 +18,12 @@
     </properties>
 
     <dependencies>
+        <!--注意想要要使用web项目，rocketmq会使用
+            否则接到消息时会报错：
+            Dispatcher has no subscribers for channel 'application.input'.;
+            nested exception is org.springframework.integration.MessageDispatchingException:
+            Dispatcher has no subscribers, failedMessage=GenericMessage
+        -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
