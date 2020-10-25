@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-public class HelloWorld {
+public class HelloFlowRule {
 
     private static void doSomething(){
         try (Entry entry = SphU.entry("doSomething")){
