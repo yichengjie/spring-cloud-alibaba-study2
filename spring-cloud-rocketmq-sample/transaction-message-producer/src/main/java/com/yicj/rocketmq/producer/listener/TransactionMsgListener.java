@@ -38,6 +38,7 @@ public class TransactionMsgListener implements RocketMQLocalTransactionListener 
         }
     }
 
+    // 数据库业务事务方法
     private boolean saveOrder(Order order, String transactionId) {
         // 将事务ID设置为唯一键
         // 调用数据库 insert to 订单表
