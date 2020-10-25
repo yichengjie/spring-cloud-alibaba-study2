@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
-public class Order implements Serializable {
+public class Order {
     private String orderId ;
     private String address ;
 }
