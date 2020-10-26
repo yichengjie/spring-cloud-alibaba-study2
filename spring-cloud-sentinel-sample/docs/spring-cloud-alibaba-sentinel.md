@@ -17,7 +17,8 @@
         return "被限流了" ;
     }
     ```
-3. 手动配置流控规则
+#### 手动配置
+1. 手动配置流控规则
     ```text
     public class FlowRuleInitFunc implements InitFunc {
         @Override
@@ -33,12 +34,12 @@
         }
     }
     ```
-4. ~~利用SPI扩展点机制加载流控规则(经测试发现不生效)~~
+2. ~~利用SPI扩展点机制加载流控规则(经测试发现不生效)~~
     ```text
     4.1 在/resource/META-INF/创建com.alibaba.csp.sentinel.init.InitFunc文件~~
     4.2 文件内容为com.yicj.study.sentinel.init.FlowRuleInitFunc~~
     ```
-5. 因为SPI扩展点不生效，这里我们可以使用ApplicationRunner手动加载
+3. 因为SPI扩展点不生效，这里我们可以使用ApplicationRunner手动加载
     ```text
     @Component
     public class MyAppRunner implements ApplicationRunner {
@@ -49,3 +50,10 @@
         }
     }
     ```
+#### 整合dashboard配置
+1. 添加配置
+    ```text
+    spring.cloud.sentinel.transport.port=8719
+    spring.cloud.sentinel.transport.dashboard=192.168.221.128:8080
+    ```
+2. 通过dashboard配置
