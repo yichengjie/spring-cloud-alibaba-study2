@@ -56,4 +56,46 @@
     spring.cloud.sentinel.transport.port=8719
     spring.cloud.sentinel.transport.dashboard=192.168.221.128:8080
     ```
-2. 通过dashboard配置
+2. 通过dashboard配置即可
+#### 自定义url限流异常
+1. 通过实现特定接口返回自定义信息
+    ```text
+    @Service
+    public class CustomUrlBlockHandler implements BlockExceptionHandler {
+        @Override
+        public void handle(HttpServletRequest request, HttpServletResponse response, BlockException e) throws Exception {
+            response.setHeader("Content-Type","application/json;charset=UTF-8");
+            // {"code":999, "msg":"访问人数过多"}
+            String msg = "{\"code\":999, \"msg\":\"访问人数过多\"}" ;
+            response.getWriter().write(msg);
+        }
+    }
+    ```
+2. 限流触发跳转自定义页面
+    ```text
+    spring.cloud.sentinel.block-page={url}
+    ```
+#### 资源清晰
+1. 流控资源
+    ```text
+    @GetMapping("/clean/{id}")
+    public String clean(@PathVariable("id") int id){
+        return "Hello clean" ;
+    }
+    ```
+2. 清洗组件
+    ```text
+    @Component
+    public class CustomerUrlCleaner implements UrlCleaner {
+        @Override
+        public String clean(String originUrl) {
+            if (StringUtils.isEmpty(originUrl)){
+                return originUrl;
+            }
+            if (originUrl.startsWith("/clean/")){
+                return "/clean/*" ;
+            }
+            return originUrl;
+        }
+    }
+    ```
