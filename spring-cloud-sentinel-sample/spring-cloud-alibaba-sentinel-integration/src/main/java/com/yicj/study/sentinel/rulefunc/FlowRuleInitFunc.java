@@ -1,4 +1,4 @@
-package com.yicj.study.sentinel.init;
+package com.yicj.study.sentinel.rulefunc;
 
 import com.alibaba.csp.sentinel.init.InitFunc;
 import com.alibaba.csp.sentinel.slots.block.RuleConstant;

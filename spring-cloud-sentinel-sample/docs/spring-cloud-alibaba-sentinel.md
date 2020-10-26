@@ -33,8 +33,19 @@
         }
     }
     ```
-4. 利用SPI扩展点机制加载流控规则
-```text
-4.1 在/resource/META-INF/创建com.alibaba.csp.sentinel.init.InitFunc文件
-4.2 文件内容为com.yicj.study.sentinel.init.FlowRuleInitFunc
-```
+4. ~~利用SPI扩展点机制加载流控规则(经测试发现不生效)~~
+    ```text
+    4.1 在/resource/META-INF/创建com.alibaba.csp.sentinel.init.InitFunc文件~~
+    4.2 文件内容为com.yicj.study.sentinel.init.FlowRuleInitFunc~~
+    ```
+5. 因为SPI扩展点不生效，这里我们可以使用ApplicationRunner手动加载
+    ```text
+    @Component
+    public class MyAppRunner implements ApplicationRunner {
+        @Override
+        public void run(ApplicationArguments args) throws Exception {
+            // 加载流控规则
+            new FlowRuleInitFunc().init();
+        }
+    }
+    ```
